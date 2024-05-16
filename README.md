@@ -37,3 +37,4 @@ Create Provider : nest g service users
 
 Providers
 Providers are a fundamental concept in Nest. Many of the basic Nest classes may be treated as a provider – services, repositories, factories, helpers, and so on. The main idea of a provider is that it can be injected as a dependency;![provider](image-1.png)
+Create Provider : nest g service users
