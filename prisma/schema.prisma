@@ -30,5 +30,5 @@ model Employee {
 enum Role {
   ADMIN
   INTERN
-  ENGINEER
+  ENGINNER
 }
