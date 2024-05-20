@@ -9,24 +9,43 @@ import {
   Query,
 } from '@nestjs/common';
 import { EmployeesService } from './employees.service';
-import { Prisma, Role } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { SkipThrottle, Throttle } from '@nestjs/throttler';
+import { ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
 
+import { ApiProperty } from '@nestjs/swagger';
+
+export class EmployeeCreateInput {
+  @ApiProperty()
+  name: string;
+  email: string;
+  role: 'INTERN' | 'ADMIN' | 'ENGINEER';
+}
 @SkipThrottle()
 @Controller('employees')
 export class EmployeesController {
   constructor(private readonly employeesService: EmployeesService) {}
 
+  @ApiTags('EMPLOYEE')
+  @ApiBody({ type: EmployeeCreateInput })
   @Post()
   create(@Body() createEmployeeDto: Prisma.EmployeeCreateInput) {
     return this.employeesService.create(createEmployeeDto);
   }
+
+  @ApiTags('EMPLOYEE')
   @SkipThrottle({ default: false })
+  @ApiQuery({
+    name: 'role',
+    enum: ['INTERN', 'ADMIN', 'ENGINEER'],
+    required: false,
+  })
   @Get()
   findAll(@Query('role') role?: 'INTERN' | 'ADMIN' | 'ENGINNER') {
     return this.employeesService.findAll(role);
   }
 
+  @ApiTags('EMPLOYEE')
   @Throttle({ short: { ttl: 1000, limit: 1 } })
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -41,6 +60,7 @@ export class EmployeesController {
   //   return this.employeesService.update(+id, updateEmployeeDto);
   // }
 
+  @ApiTags('EMPLOYEE')
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.employeesService.remove(+id);
