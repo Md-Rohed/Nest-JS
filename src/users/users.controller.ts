@@ -23,7 +23,7 @@ export class UsersController {
   @ApiTags('USER')
   @ApiQuery({
     name: 'role',
-    enum: ['INTERN', 'ADMIN', 'ENGINEER'],
+    enum: ['INTERN', 'ADMIN', 'ENGINNER'],
     required: false,
   })
   @Get() // GET /users or /users?role=value

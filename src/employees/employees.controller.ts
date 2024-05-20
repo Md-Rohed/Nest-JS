@@ -19,7 +19,7 @@ export class EmployeeCreateInput {
   @ApiProperty()
   name: string;
   email: string;
-  role: 'INTERN' | 'ADMIN' | 'ENGINEER';
+  role: 'INTERN' | 'ADMIN' | 'ENGINNER';
 }
 @SkipThrottle()
 @Controller('employees')
@@ -37,7 +37,7 @@ export class EmployeesController {
   @SkipThrottle({ default: false })
   @ApiQuery({
     name: 'role',
-    enum: ['INTERN', 'ADMIN', 'ENGINEER'],
+    enum: ['INTERN', 'ADMIN', 'ENGINNER'],
     required: false,
   })
   @Get()
