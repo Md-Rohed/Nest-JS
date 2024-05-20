@@ -12,13 +12,13 @@ export class EmployeesService {
   }
 
   async findAll(role?: 'INTERN' | 'ADMIN' | 'ENGINNER') {
-    if (role) {
-      return this.databaseService.employee.findMany({
-        where: {
-          role: 'ENGINEER',
-        },
-      });
-    }
+    // if (role) {
+    //   return this.databaseService.employee.findMany({
+    //     where: {
+    //       role: role
+    //     },
+    //   });
+    // }
 
     return this.databaseService.employee.findMany();
   }
